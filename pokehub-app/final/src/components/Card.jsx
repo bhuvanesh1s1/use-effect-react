@@ -9,6 +9,7 @@ function Card({ pokemonInfo }) {
   const [pokemon, setPokemon] = useState();
   const [info, setInfo] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     // fetch(pokemonInfo?.url)
     //   .then((res) => res.json())
@@ -67,8 +68,10 @@ function Card({ pokemonInfo }) {
         <img
           src={pokemon?.sprites?.other?.dream_world?.front_default}
           alt="pokemon image"
-          className="h-[100px] w-[100px] object-contain p-1 rounded-md"
+          className="h-[100px] w-[100px] object-contain p-1 rounded-md cursor-pointer"
+          onClick={() => new Audio(pokemon?.cries?.latest).play()}
         />
+
         <h2 className="text-gray-700 text-center font-semibold border-[1px] border-dotted bg-slate-50   border-teal-900">
           {pokemonInfo.name[0].toUpperCase() + pokemonInfo.name.slice(1)}
         </h2>
