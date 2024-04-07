@@ -1,4 +1,4 @@
-# Apps using useState hook
+# Apps using useEffect hook
 
 ## Initializing & starting the app
 
