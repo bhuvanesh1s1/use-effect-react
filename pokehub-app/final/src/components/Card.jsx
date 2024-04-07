@@ -6,9 +6,17 @@ import { colors, colorKeys } from '../utils/colors';
 import { emojis, emojiKeys } from '../utils/emojis';
 
 function Card({ pokemonInfo }) {
-  const [pokemon, setPokemon] = useState();
-  const [info, setInfo] = useState('');
+  const [pokemon, setPokemon] = useState(null);
+  // const [info, setInfo] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  let info;
+
+  if (pokemon) {
+    const pokeType = pokemon?.types.map((type) => type.type.name);
+    const colorType = colorKeys.find((type) => pokeType?.indexOf(type) > -1);
+    const emoji = emojiKeys.find((type) => pokeType?.indexOf(type) > -1);
+    info = { type: colorType, emoji };
+  }
 
   useEffect(() => {
     // fetch(pokemonInfo?.url)
@@ -37,10 +45,10 @@ function Card({ pokemonInfo }) {
 
     getPokemonInfo(pokemonInfo?.url)
       .then((data) => {
-        const pokeType = data.types.map((type) => type.type.name);
-        const colorType = colorKeys.find((type) => pokeType.indexOf(type) > -1);
-        const emoji = emojiKeys.find((type) => pokeType.indexOf(type) > -1);
-        setInfo({ type: colorType, emoji });
+        // const pokeType = data.types.map((type) => type.type.name);
+        // const colorType = colorKeys.find((type) => pokeType.indexOf(type) > -1);
+        // const emoji = emojiKeys.find((type) => pokeType.indexOf(type) > -1);
+        // setInfo({ type: colorType, emoji });
         setPokemon(data);
       })
       .finally(() => {
