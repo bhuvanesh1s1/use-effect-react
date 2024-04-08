@@ -9,6 +9,7 @@ function Card({ pokemonInfo }) {
   const [pokemon, setPokemon] = useState(null);
   // const [info, setInfo] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  // const [title, setTitle] = useState('');
   let info;
 
   if (pokemon) {
@@ -59,6 +60,23 @@ function Card({ pokemonInfo }) {
       });
   }, [pokemonInfo]);
 
+  // useEffect(
+  //   function () {
+  //     if (!title) return;
+  //     document.title = 'Pokemon Hub App : ' + title;
+  //     const timeoutId = setTimeout(function () {
+  //       document.title = 'Pokemon Hub App';
+  //     }, 2000);
+
+  //     return function () {
+  //       console.log(timeoutId);
+  //       clearTimeout(timeoutId);
+  //       console.log('return executed');
+  //     };
+  //   },
+  //   [title]
+  // );
+
   if (isLoading)
     return (
       <section className="flex shadow-md items-center justify-center bg-slate-200 p-4 rounded-lg h-auto w-[280px]">
@@ -77,7 +95,12 @@ function Card({ pokemonInfo }) {
           src={pokemon?.sprites?.other?.dream_world?.front_default}
           alt="pokemon image"
           className="h-[100px] w-[100px] object-contain p-1 rounded-md cursor-pointer"
-          onClick={() => new Audio(pokemon?.cries?.latest).play()}
+          onClick={() => {
+            new Audio(pokemon?.cries?.latest).play();
+            // setTitle(
+            //   pokemonInfo.name[0].toUpperCase() + pokemonInfo.name.slice(1)
+            // );
+          }}
         />
 
         <h2 className="text-gray-700 text-center font-semibold border-[1px] border-dotted bg-slate-50   border-teal-900">
